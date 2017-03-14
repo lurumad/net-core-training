@@ -1,0 +1,8 @@
+@model IEnumerable<Models.News>
+
+<ul>
+    @foreach(var news in Model)
+    {
+        <li><strong>@news.Title</strong></li>
+    }
+</ul>
