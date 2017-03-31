@@ -13,26 +13,19 @@ namespace scaffolding.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
+                .HasAnnotation("ProductVersion", "1.1.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("scaffolding.Blog", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("BackingField", "Id");
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<string>("BlogNumber")
-                        .IsRequired()
-                        .HasAnnotation("BackingField", "BlogNumber");
+                    b.Property<string>("BlogNumber");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasAnnotation("BackingField", "Title");
+                    b.Property<string>("Title");
 
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasAnnotation("BackingField", "Url");
+                    b.Property<string>("Url");
 
                     b.HasKey("Id");
 
@@ -44,7 +37,7 @@ namespace scaffolding.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("BlogNumber");
+                    b.Property<int?>("BlogId");
 
                     b.Property<string>("Content");
 
@@ -52,7 +45,7 @@ namespace scaffolding.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BlogNumber");
+                    b.HasIndex("BlogId");
 
                     b.ToTable("Posts");
                 });
@@ -61,8 +54,7 @@ namespace scaffolding.Migrations
                 {
                     b.HasOne("scaffolding.Blog")
                         .WithMany("Posts")
-                        .HasForeignKey("BlogNumber")
-                        .HasPrincipalKey("BlogNumber");
+                        .HasForeignKey("BlogId");
                 });
         }
     }

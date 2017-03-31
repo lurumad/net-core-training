@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace scaffolding.Migrations
 {
-    public partial class AddSurrogates : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,14 +15,13 @@ namespace scaffolding.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BlogNumber = table.Column<string>(nullable: false),
-                    Title = table.Column<string>(nullable: false),
-                    Url = table.Column<string>(nullable: false)
+                    BlogNumber = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
+                    Url = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Blogs", x => x.Id);
-                    table.UniqueConstraint("AK_Blogs_BlogNumber", x => x.BlogNumber);
                 });
 
             migrationBuilder.CreateTable(
@@ -31,7 +30,7 @@ namespace scaffolding.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BlogNumber = table.Column<string>(nullable: true),
+                    BlogId = table.Column<int>(nullable: true),
                     Content = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true)
                 },
@@ -39,17 +38,17 @@ namespace scaffolding.Migrations
                 {
                     table.PrimaryKey("PK_Posts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Posts_Blogs_BlogNumber",
-                        column: x => x.BlogNumber,
+                        name: "FK_Posts_Blogs_BlogId",
+                        column: x => x.BlogId,
                         principalTable: "Blogs",
-                        principalColumn: "BlogNumber",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_BlogNumber",
+                name: "IX_Posts_BlogId",
                 table: "Posts",
-                column: "BlogNumber");
+                column: "BlogId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

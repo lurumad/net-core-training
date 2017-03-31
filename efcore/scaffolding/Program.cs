@@ -14,12 +14,17 @@ namespace scaffolding
         {
             using(var context = new BlogDbContext())
             {
-                //var blog = new Blog("Luru Blog","http://geeks.ms/blogs/lruiz");
-                //blog.Posts.Add(new Post(){Title = "My first post", Content = "asdasdasdasdasdas"});
+                var blog = new Blog() { Title = "Luru Blog", Url = "http://geeks.ms/blogs/lruiz" };
+                blog.Posts.Add(new Post() { Title = "My first post", Content = "asdasdasdasdasdas" });
+                context.Blogs.Add(blog);
+                context.Blogs.Add(new Blog() { Title = "Unai Blog", Url = "http://geeks.ms/blogs/unai" });
+
+                //var blog = new Blog("Luru Blog", "http://geeks.ms/blogs/lruiz");
+                //blog.Posts.Add(new Post() { Title = "My first post", Content = "asdasdasdasdasdas" });
                 //context.Blogs.Add(blog);
                 //context.Blogs.Add(new Blog("Unai Blog", "http://geeks.ms/blogs/unai"));
 
-                //context.SaveChanges();
+                context.SaveChanges();
 
                 //============ CLIENT EVALUATION ==========
 
@@ -49,7 +54,7 @@ namespace scaffolding
         {
             if (!options.IsConfigured)
             {
-                options.UseSqlServer(@"Server=.\SQLEXPRESS;Database=BloggingWorld;Trusted_Connection=True");
+                options.UseSqlServer(@"Server=.;Database=BloggingWorld;User Id=sa;Password=Plainconcepts01!");
             }
 
             //============ COMMON SERVICES ==========
@@ -143,9 +148,9 @@ namespace scaffolding
         public string BlogNumber { get;  set; }
         public string Url { get;  set; }
         public string Title { get;  set; }
-        public List<Post> Posts { get;  set; }
+        public List<Post> Posts { get; set; } = new List<Post>();
 
-        protected Blog() { }
+        //protected Blog() { }
 
         //public Blog(string title, string url)
         //{
