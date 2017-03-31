@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace scaffolding
 {
@@ -14,13 +15,13 @@ namespace scaffolding
         {
             using(var context = new BlogDbContext())
             {
-                var blog = new Blog() { Title = "Luru Blog", Url = "http://geeks.ms/blogs/lruiz" };
-                blog.Posts.Add(new Post() { Title = "My first post", Content = "asdasdasdasdasdas" });
-                context.Blogs.Add(blog);
-                context.Blogs.Add(new Blog() { Title = "Unai Blog", Url = "http://geeks.ms/blogs/unai" });
+                //var blog = new Blog() { Title = "Luru Blog", Url = "http://geeks.ms/blogs/lruiz" };
+                //blog.Posts.Add(new Post() { Title = "My first post", Content = "asdasdasdasdasdas" });
+                //context.Blogs.Add(blog);
+                //context.Blogs.Add(new Blog() { Title = "Unai Blog", Url = "http://geeks.ms/blogs/unai" });
 
                 //var blog = new Blog("Luru Blog", "http://geeks.ms/blogs/lruiz");
-                //blog.Posts.Add(new Post() { Title = "My first post", Content = "asdasdasdasdasdas" });
+                //blog.AddPost(new Post() { Title = "My first post", Content = "asdasdasdasdasdas" });
                 //context.Blogs.Add(blog);
                 //context.Blogs.Add(new Blog("Unai Blog", "http://geeks.ms/blogs/unai"));
 
@@ -80,6 +81,7 @@ namespace scaffolding
 
         //    foreach (var entry in entries)
         //    {
+        //        entry.Property("LastUpdate").CurrentValue = DateTime.UtcNow;
         //        entry.Entity.LastUpdate = DateTime.UtcNow;
         //    }
 
@@ -93,7 +95,7 @@ namespace scaffolding
             //modelBuilder.HasSequence("BLOG_SEQUENCE", "dbo", rsb =>
             //{
             //    rsb.StartsAt(1);
-            //    rsb.IncrementsBy(1);
+            //    rsb.IncrementsBy(10);
             //});
 
             //modelBuilder
@@ -116,25 +118,29 @@ namespace scaffolding
             //    .Entity<Blog>()
             //    .Property(b => b.Id)
             //    .IsRequired()
-            //    .HasAnnotation("BackingField", "Id");
+            //    .HasField("id");
 
             //modelBuilder
             //    .Entity<Blog>()
             //    .Property(b => b.Url)
             //    .IsRequired()
-            //    .HasAnnotation("BackingField", "Url");
+            //    .HasField("url");
 
             //modelBuilder
             //    .Entity<Blog>()
             //    .Property(b => b.Title)
             //    .IsRequired()
-            //    .HasAnnotation("BackingField", "Title");
+            //    .HasField("title");
 
             //modelBuilder
             //    .Entity<Blog>()
             //    .Property(b => b.BlogNumber)
             //    .IsRequired()
-            //    .HasAnnotation("BackingField", "BlogNumber");
+            //    .HasField("blogNumber");
+
+            //var navigation = modelBuilder.Entity<Blog>().Metadata.FindNavigation(nameof(Blog.Posts));
+
+            //navigation.SetPropertyAccessMode(PropertyAccessMode.Field);
 
             //============ SURROGATE KEYS ==========
 
@@ -144,20 +150,37 @@ namespace scaffolding
 
     public class Blog
     {
-        public int Id { get;  set; }
-        public string BlogNumber { get;  set; }
-        public string Url { get;  set; }
-        public string Title { get;  set; }
+        //private int id;
+        //private string blogNumber;
+        //private string url;
+        //private string title;
+        //private List<Post> posts;
+
+        //public int Id => id;
+        //public string BlogNumber => blogNumber;
+        //public string Url => url;
+        //public string Title => title;
+        //public IEnumerable<Post> Posts => posts.ToList();
+
+        public int Id { get; set; }
+        public string BlogNumber { get; set; }
+        public string Url { get; set; }
+        public string Title { get; set; }
         public List<Post> Posts { get; set; } = new List<Post>();
 
         //protected Blog() { }
 
         //public Blog(string title, string url)
         //{
-        //    Title = title;
-        //    Url = url;
-        //    BlogNumber = Guid.NewGuid().ToString();
-        //    Posts = new List<Post>();
+        //    this.title = title;
+        //    this.url = url;
+        //    blogNumber = Guid.NewGuid().ToString();
+        //    posts = new List<Post>();
+        //}
+
+        //public void AddPost(Post post)
+        //{
+        //    posts.Add(post);
         //}
     }
     
