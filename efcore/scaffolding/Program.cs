@@ -15,10 +15,10 @@ namespace scaffolding
         {
             using(var context = new BlogDbContext())
             {
-                //var blog = new Blog() { Title = "Luru Blog", Url = "http://geeks.ms/blogs/lruiz" };
-                //blog.Posts.Add(new Post() { Title = "My first post", Content = "asdasdasdasdasdas" });
-                //context.Blogs.Add(blog);
-                //context.Blogs.Add(new Blog() { Title = "Unai Blog", Url = "http://geeks.ms/blogs/unai" });
+                var blog = new Blog() { Title = "Luru Blog", Url = "http://geeks.ms/blogs/lruiz" };
+                blog.Posts.Add(new Post() { Title = "My first post", Content = "asdasdasdasdasdas" });
+                context.Blogs.Add(blog);
+                context.Blogs.Add(new Blog() { Title = "Unai Blog", Url = "http://geeks.ms/blogs/unai" });
 
                 //var blog = new Blog("Luru Blog", "http://geeks.ms/blogs/lruiz");
                 //blog.AddPost(new Post() { Title = "My first post", Content = "asdasdasdasdasdas" });
@@ -29,7 +29,7 @@ namespace scaffolding
 
                 //============ CLIENT EVALUATION ==========
 
-                //var blog = context.Blogs.Where(b => b.Url.IsValidUrl()).ToList();
+                //var blogs = context.Blogs.Where(b => b.Url.IsValidUrl()).ToList();
 
                 //============ RAW SQL ==========
 
@@ -39,7 +39,7 @@ namespace scaffolding
                 //    .Where(b => b.Url == "http://geeks.ms/blogs/lruiz")
                 //    .ToList();
 
-                //Console.WriteLine(blog[0].Title);
+                //Console.WriteLine(blogs[0].Title);
             }
 
             Console.Read();
