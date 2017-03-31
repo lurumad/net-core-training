@@ -163,6 +163,7 @@ namespace scaffolding
         //public IEnumerable<Post> Posts => posts.ToList();
 
         public int Id { get; set; }
+        public string PropertyOne { get; set; }
         public string BlogNumber { get; set; }
         public string Url { get; set; }
         public string Title { get; set; }
